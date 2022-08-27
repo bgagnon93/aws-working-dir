@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'AWS CloudFormation Simple Lambda Function'
+
+Resources:
+  LambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: hello-world-function
+      Runtime: python3.8
+      CodeUri: function/
+      Handler: app.lambda_handler
+      MemorySize: 256
+      PackageType: Zip

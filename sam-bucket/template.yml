@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
-
 Description: 'AWS CloudFormation S3 Bucket for SAM resources'
+
 Resources:
   S3Bucket:
     Type: 'AWS::S3::Bucket'

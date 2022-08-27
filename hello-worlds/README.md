@@ -1,0 +1,1 @@
+The purpose of this directory is to create "temporary" starter projects. I'd like to keep the record of these projects in a location I can revisit. Nothing in this directory should be used to support other resources in the repository. 
