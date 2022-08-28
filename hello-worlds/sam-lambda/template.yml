@@ -2,7 +2,29 @@ AWSTemplateFormatVersion: "2010-09-09"
 Transform: 'AWS::Serverless-2016-10-31'
 Description: 'AWS CloudFormation Simple Lambda Function'
 
+Parameters:
+  StageName:
+    Type: String
+    Default: dev
+  Region:
+    Type: String
+    Default: us-east-1
+
 Resources:
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      Domain:
+        DomainName: lambda.orange-lightning.com
+        CertificateArn: arn:aws:acm:us-east-1:983510677257:certificate/a4ccaf0d-8908-442a-8c30-5bdc714939b9
+        EndpointConfiguration: EDGE
+        Route53:
+          HostedZoneId: Z011332417LB0ZI4AZL3M
+        # BasePath:
+        #   - foo
+        #   - bar
+
   LambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -12,3 +34,16 @@ Resources:
       Handler: app.lambda_handler
       MemorySize: 256
       PackageType: Zip
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: post
+            RestApiId:
+              Ref: ApiGatewayApi
+
+Outputs:
+  Endpoint: 
+    Description: Endpoint for Lambda Function.
+    Value: !Sub "https://${ApiGatewayApi}.execute-api.${Region}.amazonaws.com/${StageName}/"

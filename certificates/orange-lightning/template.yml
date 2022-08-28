@@ -1,0 +1,9 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: 'AWS CloudFormation Simple Lambda Function'
+
+Resources:
+  Certificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties: 
+      DomainName: "*.orange-lightning.com"
+      ValidationMethod: DNS
