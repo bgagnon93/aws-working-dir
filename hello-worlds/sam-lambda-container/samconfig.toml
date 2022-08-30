@@ -1,0 +1,13 @@
+version=0.1
+[default.global.parameters]
+stack_name = "hello-world-container"
+image_repository = "983510677257.dkr.ecr.us-east-1.amazonaws.com/hello-lambda-container"
+s3_bucket = "sam-resources-bucket"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = ["CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"]
+
+[default.deploy.parameters]
+
+
+[default.build.parameters]

@@ -21,3 +21,18 @@ I set up a simple sam deployment solution which orchestrates the creation of an 
 <img src="https://user-images.githubusercontent.com/38666646/187100897-783ebf0d-13b6-480f-b750-ea4fb04945b8.png" alt="training-app-architecture" width="500">
 
 Tomorrow's the start of the work week, so I'm skeptical I'll be able to keep this momentum up. That said, I'd like to try building a video or music playback service. A 'login' service could also be cool - how would I go about setting up a simple DB for authenticating preferences. Maybe I really could build that Planit Poker site. Or even a retro board. 
+
+### August 29
+At work today, I wrapped up some documentation describing how to publish Images to ECR and deploy with SAM. With that experience fresh, I figure I should repeat those activities here. Better yet, this time, I'll pair them with the API Gateway, secured behind my custom domain and cert!
+
+The sam-lambda-container directory contains an app.py of equal complexity to the sam-lambda directory, it simply returns a hello-world. However, instead of packaging that code in a zip (far more practical), I am instead publishing it as a Container.
+
+Deployment of a container resource is a bit trickier than a sam function. I have to update the template.yml with the unique Image URI each time. Instead of subjecting myself to that tedium (and setting myself up to make that mistake 100 times), I wrote a bash script which performs all the build and deploy activities, and pulls the unique sha for the Image to use for deployment. I can reuse this script for any container applications I build in the future. 
+
+I love this approach. It's slower than an ordinary zipped up lambda, but for heavier applications (even solutions requiring ECS), it's a perfect fit. I can make code and template changes, and they only take ~3 minutes to build/deploy in full, all from my local. 
+
+Here's what I built:
+
+<img src="https://user-images.githubusercontent.com/38666646/187336795-dffd24ef-89e8-46a0-b8eb-e96126efa1e0.png" alt="training-app-architecture" width="500">
+
+This wasn't the planned activity for today, but it worked out. We'll see what tomorrow brings, all of this is helpful. 
