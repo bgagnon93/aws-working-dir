@@ -4,6 +4,7 @@ This challenge may be broken down into two steps. First, I should convert the ex
 
 To solve this problem, I brought in both the stack and queue data structure classes from the data structures course I took recently. I then created two independent python scripts for generating the postfix expression and evaluating it. These could be joined in one class, but I figure this is a small module. It makes sense to me to split them out so I may work on them independently. Below is the file structure:
 
+```bash
 ├── function
 │   ├── app.py
 │   ├── algorithms
@@ -18,6 +19,7 @@ To solve this problem, I brought in both the stack and queue data structure clas
 ├── template.yml
 ├── samconfig.toml
 ├── README.md
+```
 
 I was excited to empower end users to pass a query parameter to be evaluated, but that's not going to play nicely when put in a url. Instead, I'll set up a simple POST service. 
 
