@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'AWS CloudFormation Simple Lambda Function'
+
+Parameters:
+  StageName:
+    Type: String
+    Default: dev
+  Region:
+    Type: String
+    Default: us-east-1
+
+Resources:
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      Domain:
+        DomainName: mathexpression.gagnonagon.com
+        CertificateArn: arn:aws:acm:us-east-1:983510677257:certificate/da5bbe33-631c-407c-ac1f-caab6c21c1f2
+        EndpointConfiguration: EDGE
+        Route53:
+          HostedZoneId: Z02078493KG1I0U5VKXFC
+
+  LambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: math-expression-function
+      Runtime: python3.8
+      CodeUri: function/
+      Handler: app.lambda_handler
+      MemorySize: 256
+      PackageType: Zip
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: post
+            RestApiId:
+              Ref: ApiGatewayApi
+
+Outputs:
+  Endpoint: 
+    Description: Endpoint for Lambda Function.
+    Value: !Sub "https://${ApiGatewayApi}.execute-api.${Region}.amazonaws.com/${StageName}/"
