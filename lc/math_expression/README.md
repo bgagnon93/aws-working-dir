@@ -51,7 +51,9 @@ This Function is coupled with a Serverless API. The API uses a Custom Domain, an
 
 A curl command in the terminal may also be used to invoke the function. 
 
+```bash
 curl -X POST https://mathexpression.gagnonagon.com -H 'Content-Type: application/json' -d '"14+3*10^2/5-61"'
+```
 
 ## Architecture
 <img src="https://user-images.githubusercontent.com/38666646/187108756-7a875759-41e2-4dd6-a71d-83d721de5a38.png" alt="training-app-architecture" width="500">
