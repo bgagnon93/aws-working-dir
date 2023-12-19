@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  project: default
+  source:
+    helm:
+      valueFiles:
+        - values.yaml # Include your customized values for Grafana here
+      chart: grafana # Path to your Grafana Helm chart
+    repoURL: https://grafana.github.io/helm-charts # URL of your Helm chart repository
+    # targetRevision: HEAD
+  syncPolicy:
+    automated: true
+    syncOptions:
+      - CreateNamespace=true
